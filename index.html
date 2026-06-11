@@ -13,8 +13,9 @@
     .font-display { font-family: 'Cinzel', serif; }
     .void {
       background:
-        radial-gradient(1200px 800px at 50% 45%, rgba(167,139,250,0.18), transparent 60%),
-        radial-gradient(900px 600px at 18% 12%, rgba(34,211,238,0.12), transparent 60%),
+        radial-gradient(1400px 900px at 50% 42%, rgba(167,139,250,0.18), transparent 62%),
+        radial-gradient(1100px 700px at 16% 10%, rgba(34,211,238,0.12), transparent 60%),
+        radial-gradient(1100px 700px at 86% 14%, rgba(251,191,36,0.08), transparent 60%),
         radial-gradient(1px 1px at 12% 22%, #ffffff, transparent),
         radial-gradient(1px 1px at 34% 64%, #ffffff, transparent),
         radial-gradient(1.5px 1.5px at 66% 18%, #ffffff, transparent),
@@ -22,6 +23,8 @@
         radial-gradient(1.5px 1.5px at 24% 82%, #ffffff, transparent),
         radial-gradient(1px 1px at 92% 88%, #ffffff, transparent),
         radial-gradient(1px 1px at 54% 40%, #ffffff, transparent),
+        radial-gradient(1px 1px at 6% 56%, #ffffff, transparent),
+        radial-gradient(1px 1px at 96% 34%, #ffffff, transparent),
         #03040A;
     }
     .glass { background: rgba(11,15,31,0.55); backdrop-filter: blur(14px); }
@@ -35,28 +38,56 @@
     .ring-spin { animation: spin-slow 60s linear infinite; }
     @keyframes twinkle { 0%,100% { opacity:.3 } 50% { opacity:1 } }
     .twinkle { animation: twinkle 3s ease-in-out infinite; }
-    /* cosmic audio equalizer bars */
-    @keyframes wave {
-      0%,100% { transform: scaleY(0.3); }
-      50%     { transform: scaleY(1); }
-    }
     .wave-bar { transform-origin: bottom; animation: wave 1s ease-in-out infinite; }
+    @keyframes wave { 0%,100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
     .wave-paused .wave-bar { animation-play-state: paused; transform: scaleY(0.25); }
     @keyframes halo-pulse {
       0%,100% { box-shadow: 0 0 0 0 rgba(251,191,36,0.0), 0 0 26px rgba(167,139,250,0.25); }
       50%     { box-shadow: 0 0 0 8px rgba(251,191,36,0.05), 0 0 36px rgba(251,191,36,0.45); }
     }
     .player-live { animation: halo-pulse 2.6s ease-in-out infinite; }
+
+    /* decorative galaxy rings scale with the screen */
+    .ring-outer { width: 760px; height: 760px; }
+    .ring-inner { width: 600px; height: 600px; }
+
+    /* ---- Optimized for 1920 x 1080 (Full HD) ---- */
+    @media (min-width: 1920px) {
+      header.site-header { padding-left: 4rem; padding-right: 4rem; }
+      .hero-kicker { font-size: 0.95rem; letter-spacing: 0.5em; }
+      .hero-title  { font-size: 6rem; line-height: 1.04; }
+      .hero-sub    { font-size: 1.2rem; max-width: 44rem; }
+      .ring-outer  { width: 1020px; height: 1020px; }
+      .ring-inner  { width: 820px;  height: 820px;  }
+      .lore-grid   { max-width: 84rem; gap: 2.5rem; }
+    }
+
+    /* ---- Optimized for 3440 x 1400 (Ultrawide) ---- */
+    @media (min-width: 2560px) {
+      header.site-header { padding-left: 6rem; padding-right: 6rem; }
+      .nav-links { gap: 3.2rem; font-size: 0.95rem; }
+      .hero-kicker { font-size: 1.15rem; letter-spacing: 0.62em; }
+      .hero-title  { font-size: 9rem; line-height: 1.02; }
+      .hero-sub    { font-size: 1.55rem; max-width: 60rem; }
+      .hero-overlay { transform: translateY(-2%); }
+      .ring-outer  { width: 1340px; height: 1340px; }
+      .ring-inner  { width: 1060px; height: 1060px; }
+      .hud-shell   { padding: 0.85rem 1rem; gap: 0.65rem; }
+      .hud-btn     { width: 3.4rem; height: 3.4rem; font-size: 1.15rem; }
+      .lore-section, .narration-section { padding-left: 8vw; padding-right: 8vw; }
+      .lore-grid   { max-width: 96rem; gap: 3rem; }
+      .lore-title  { font-size: 3.2rem; }
+    }
   </style>
 </head>
-<body class="w-[1440px] void text-slate-200">
+<body class="w-full min-w-[1280px] void text-slate-200 overflow-x-hidden">
 
-  <header data-design-id="header-main-a1b2c3" class="absolute top-0 left-0 w-full px-12 py-6 flex items-center justify-between z-30">
+  <header data-design-id="header-main-a1b2c3" class="site-header absolute top-0 left-0 w-full px-12 py-6 flex items-center justify-between z-30">
     <a href="#galaxy-hero" class="flex items-center gap-3">
       <i class="fa-solid fa-meteor text-amber-300 text-2xl"></i>
       <span class="font-display text-xl font-bold tracking-[0.2em] text-white">ASTRARIUM</span>
     </a>
-    <nav data-design-id="nav-primary-d4e5f6" class="flex items-center gap-9 text-[13px] tracking-widest uppercase text-slate-300">
+    <nav data-design-id="nav-primary-d4e5f6" class="nav-links flex items-center gap-9 text-[13px] tracking-widest uppercase text-slate-300">
       <a href="#galaxy-hero" class="hover:text-amber-300 transition">Galaxy</a>
       <a href="#lore-section" class="hover:text-amber-300 transition">Constellations</a>
       <a href="#lore-section" class="hover:text-amber-300 transition">Lore</a>
@@ -66,32 +97,32 @@
 
   <main data-design-id="main-content-g7h8i9" class="w-full">
 
-    <!-- Interactive 3D galaxy hero -->
-    <section id="galaxy-hero" data-design-id="galaxy-hero-j1k2l3" class="relative w-full min-h-[900px] flex items-center justify-center overflow-hidden">
+    <!-- Interactive 3D galaxy hero — fills the full viewport at any resolution -->
+    <section id="galaxy-hero" data-design-id="galaxy-hero-j1k2l3" class="relative w-full min-h-[1080px] flex items-center justify-center overflow-hidden">
 
-      <!-- decorative rotating outer ring -->
-      <div class="ring-spin absolute w-[760px] h-[760px] rounded-full border border-amber-300/10"></div>
-      <div class="ring-spin absolute w-[600px] h-[600px] rounded-full border border-violet-400/10" style="animation-duration:90s"></div>
+      <!-- decorative rotating outer rings -->
+      <div class="ring-spin ring-outer absolute rounded-full border border-amber-300/10"></div>
+      <div class="ring-spin ring-inner absolute rounded-full border border-violet-400/10" style="animation-duration:90s"></div>
 
-      <!-- the live galaxy canvas -->
-      <canvas id="galaxy" width="1440" height="900" class="absolute inset-0 w-full h-full"></canvas>
+      <!-- the live galaxy canvas — resized to the real viewport in JS -->
+      <canvas id="galaxy" class="absolute inset-0 w-full h-full"></canvas>
 
       <!-- floating title overlay -->
-      <div class="relative z-20 text-center pointer-events-none px-6">
-        <p class="ornament text-amber-300/80 text-sm tracking-[0.45em] uppercase mb-5">Our Home Galaxy</p>
-        <h1 class="font-display text-7xl font-bold text-white gold-text leading-tight">The Milky Way</h1>
-        <p class="mt-6 text-base text-slate-300/90 max-w-xl mx-auto leading-relaxed">A barred spiral of two hundred billion suns, slowly turning in the dark. Drag, spin, and lose yourself in the wheel of stars.</p>
+      <div class="hero-overlay relative z-20 text-center pointer-events-none px-6">
+        <p class="hero-kicker ornament text-amber-300/80 text-sm tracking-[0.45em] uppercase mb-5">Our Home Galaxy</p>
+        <h1 class="hero-title font-display text-7xl font-bold text-white gold-text leading-tight">The Milky Way</h1>
+        <p class="hero-sub mt-6 text-base text-slate-300/90 max-w-xl mx-auto leading-relaxed">A barred spiral of two hundred billion suns, slowly turning in the dark. Drag, spin, and lose yourself in the wheel of stars.</p>
       </div>
 
       <!-- glassmorphic control HUD -->
-      <div data-design-id="galaxy-hud-x9y8z7" class="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 glass rounded-2xl border border-white/10 px-3 py-2.5 flex items-center gap-2 pointer-events-auto">
-        <button data-design-id="hud-rotate-m4n5o6" type="button" onclick="galaxyToggle()" class="w-11 h-11 rounded-xl bg-violet-500/20 border border-violet-400/30 text-violet-200 hover:bg-violet-500/30 transition flex items-center justify-center" title="Play / pause rotation">
+      <div data-design-id="galaxy-hud-x9y8z7" class="hud-shell absolute bottom-10 left-1/2 -translate-x-1/2 z-30 glass rounded-2xl border border-white/10 px-3 py-2.5 flex items-center gap-2 pointer-events-auto">
+        <button data-design-id="hud-rotate-m4n5o6" type="button" onclick="galaxyToggle()" class="hud-btn w-11 h-11 rounded-xl bg-violet-500/20 border border-violet-400/30 text-violet-200 hover:bg-violet-500/30 transition flex items-center justify-center" title="Play / pause rotation">
           <i class="fa-solid fa-pause" id="hud-icon"></i>
         </button>
-        <button data-design-id="hud-zoomin-p7q8r9" type="button" onclick="galaxyZoom(1.15)" class="w-11 h-11 rounded-xl bg-white/5 border border-white/10 text-slate-200 hover:bg-white/10 transition flex items-center justify-center" title="Zoom in">
+        <button data-design-id="hud-zoomin-p7q8r9" type="button" onclick="galaxyZoom(1.15)" class="hud-btn w-11 h-11 rounded-xl bg-white/5 border border-white/10 text-slate-200 hover:bg-white/10 transition flex items-center justify-center" title="Zoom in">
           <i class="fa-solid fa-magnifying-glass-plus"></i>
         </button>
-        <button data-design-id="hud-zoomout-s1t2u3" type="button" onclick="galaxyZoom(0.87)" class="w-11 h-11 rounded-xl bg-white/5 border border-white/10 text-slate-200 hover:bg-white/10 transition flex items-center justify-center" title="Zoom out">
+        <button data-design-id="hud-zoomout-s1t2u3" type="button" onclick="galaxyZoom(0.87)" class="hud-btn w-11 h-11 rounded-xl bg-white/5 border border-white/10 text-slate-200 hover:bg-white/10 transition flex items-center justify-center" title="Zoom out">
           <i class="fa-solid fa-magnifying-glass-minus"></i>
         </button>
         <div class="w-px h-7 bg-white/10 mx-1"></div>
@@ -103,12 +134,12 @@
     </section>
 
     <!-- atmospheric lore strip -->
-    <section id="lore-section" data-design-id="lore-section-b1c2d3" class="px-16 py-24 scroll-mt-24">
+    <section id="lore-section" data-design-id="lore-section-b1c2d3" class="lore-section px-16 py-24 scroll-mt-24">
       <div class="max-w-5xl mx-auto text-center">
         <p class="ornament text-amber-300/70 text-xs tracking-[0.4em] uppercase">Chapters of the Wheel</p>
-        <h2 class="font-display text-4xl font-semibold text-white mt-5">Anatomy of a Spiral</h2>
+        <h2 class="lore-title font-display text-4xl font-semibold text-white mt-5">Anatomy of a Spiral</h2>
       </div>
-      <div class="mt-14 grid grid-cols-3 gap-7 max-w-6xl mx-auto">
+      <div class="lore-grid mt-14 grid grid-cols-3 gap-7 max-w-6xl mx-auto">
         <article data-design-id="lore-card-1-e4f5g6" class="glass rounded-2xl border border-white/10 p-8">
           <div class="w-12 h-12 rounded-xl bg-amber-300/15 flex items-center justify-center mb-5">
             <i class="fa-solid fa-sun text-amber-300 text-xl twinkle"></i>
@@ -134,7 +165,7 @@
     </section>
 
     <!-- Cosmic narration call-out near lore -->
-    <section id="narration-section" data-design-id="narration-section-q9w8e7" class="px-16 pb-24 -mt-4">
+    <section id="narration-section" data-design-id="narration-section-q9w8e7" class="narration-section px-16 pb-24 -mt-4">
       <div class="max-w-3xl mx-auto text-center">
         <p class="ornament text-violet-300/70 text-xs tracking-[0.4em] uppercase">Voice of the Void</p>
         <h3 class="font-display text-2xl font-semibold text-white mt-4">Listen to the Cosmic Quotes</h3>
@@ -159,7 +190,6 @@
         <i class="fa-solid fa-meteor text-amber-300/80 text-[11px]"></i>
         <span class="text-[11px] font-display tracking-[0.18em] uppercase text-white">Cosmic Quotes</span>
       </div>
-      <!-- animated equalizer -->
       <div class="flex items-end gap-[3px] h-5 wave-paused" id="audio-wave">
         <span class="wave-bar w-[3px] h-full rounded-full bg-amber-300/80" style="animation-delay:0s"></span>
         <span class="wave-bar w-[3px] h-full rounded-full bg-violet-300/80" style="animation-delay:.15s"></span>
@@ -170,7 +200,7 @@
         <span class="wave-bar w-[3px] h-full rounded-full bg-violet-200/70" style="animation-delay:.9s"></span>
       </div>
     </div>
-    <audio id="cosmic-audio" src="./assets/audio.mp3" preload="none"></audio>
+    <audio id="cosmic-audio" src="https://cdn.abacus.ai/blobs/audio_4046eccbfe4f4b7f82d0a8cbeee68ec9.mp3" preload="none"></audio>
   </div>
 
   <footer id="footer-main" data-design-id="footer-main-z7a8b9" class="px-16 py-10 border-t border-white/10 scroll-mt-24">
@@ -189,11 +219,9 @@
       const audio = document.getElementById('cosmic-audio');
       const wave = document.getElementById('audio-wave');
       const player = document.getElementById('cosmic-player');
-      const playBtn = document.getElementById('audio-play-btn');
       const icon = document.getElementById('audio-icon');
       const ctaIcon = document.getElementById('cta-audio-icon');
       const ctaLabel = document.getElementById('cta-audio-label');
-
       function setPlayingUI(playing) {
         icon.className = playing ? 'fa-solid fa-pause text-base' : 'fa-solid fa-play text-base ml-0.5';
         ctaIcon.className = playing ? 'fa-solid fa-pause text-sm' : 'fa-solid fa-play text-sm';
@@ -201,46 +229,69 @@
         wave.classList.toggle('wave-paused', !playing);
         player.classList.toggle('player-live', playing);
       }
-
       window.cosmicAudioToggle = function () {
         if (!audio) return;
-        if (audio.paused) { audio.play().catch(()=>{}); }
-        else { audio.pause(); }
+        if (audio.paused) { audio.play().catch(()=>{}); } else { audio.pause(); }
       };
       audio.addEventListener('play', () => setPlayingUI(true));
       audio.addEventListener('pause', () => setPlayingUI(false));
       audio.addEventListener('ended', () => setPlayingUI(false));
     })();
 
-    // Interactive 3D-style spiral galaxy particle visualization (visual only)
+    // Interactive spiral galaxy — fluid canvas optimized for 1920x1080 and 3440x1400 (visual only)
     (function () {
       const canvas = document.getElementById('galaxy');
+      const hero = document.getElementById('galaxy-hero');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const W = canvas.width, H = canvas.height;
-      const cx = W / 2, cy = H / 2;
-      const ARMS = 4, COUNT = 2600;
+
+      // Live, resolution-aware dimensions
+      let W = 1440, H = 1080, cx = 720, cy = 540;
+      let galaxyRadius = 600, xStretch = 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      function computeLayout() {
+        // Match the hero box to the real viewport height (no wasted space).
+        const vh = window.innerHeight;
+        if (vh > 0) hero.style.minHeight = vh + 'px';
+        const rect = canvas.getBoundingClientRect();
+        W = Math.max(1, Math.round(rect.width));
+        H = Math.max(1, Math.round(rect.height));
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cx = W / 2; cy = H / 2;
+        // Ultrawide aspect ratios stretch the disc horizontally so it fills the width.
+        const aspect = W / H;                       // 1.78 @1920x1080, 2.46 @3440x1400
+        xStretch = Math.max(1, Math.min(1.55, aspect / 1.6));
+        // Keep the wheel inside the frame on both axes (tilt ~0.55 compresses Y).
+        galaxyRadius = Math.min((W * 0.46) / xStretch, H * 0.82);
+      }
+
+      // Build stars with NORMALIZED radius fractions so they rescale with the screen.
+      const ARMS = 4, COUNT = 3000;
       const stars = [];
       const palette = ['#FBBF24', '#A78BFA', '#22D3EE', '#FFFFFF', '#C4B5FD'];
       for (let i = 0; i < COUNT; i++) {
-        const t = Math.pow(Math.random(), 0.6) * 1;
+        const t = Math.pow(Math.random(), 0.6);
         const arm = Math.floor(Math.random() * ARMS);
         const baseAngle = (arm / ARMS) * Math.PI * 2;
         const spin = t * 5.0;
         const spread = (Math.random() - 0.5) * (0.6 - t * 0.4);
         const angle = baseAngle + spin + spread;
-        const radius = t * 380 + 8;
-        const coreBias = Math.random() < 0.12 ? Math.random() * 60 : radius;
+        const isCore = Math.random() < 0.12;
+        const rFrac = isCore ? Math.random() * 0.16 : (t * 0.98 + 0.02);
         stars.push({
-          a: angle, r: coreBias,
+          a: angle, rFrac: rFrac,
           size: Math.random() * 1.8 + 0.4,
-          color: coreBias < 70 ? '#FBBF24' : palette[Math.floor(Math.random() * palette.length)],
+          color: rFrac < 0.18 ? '#FBBF24' : palette[Math.floor(Math.random() * palette.length)],
           tw: Math.random() * Math.PI * 2,
           tws: 0.02 + Math.random() * 0.04
         });
       }
+
       let rot = 0, zoom = 1, tilt = 0.55, spinning = true;
-      let dragging = false, lastX = 0, lastY = 0, baseTilt = 0.55, yaw = 0;
+      let dragging = false, lastX = 0, lastY = 0, yaw = 0;
 
       window.galaxyToggle = function () {
         spinning = !spinning;
@@ -261,8 +312,9 @@
         ctx.clearRect(0, 0, W, H);
         ctx.globalCompositeOperation = 'lighter';
         if (spinning) rot += 0.0012;
-        // core glow
-        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 150 * zoom);
+        // core glow scales with the galaxy size
+        const glowR = galaxyRadius * 0.42 * zoom;
+        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowR);
         g.addColorStop(0, 'rgba(251,191,36,0.45)');
         g.addColorStop(0.4, 'rgba(167,139,250,0.18)');
         g.addColorStop(1, 'rgba(3,4,10,0)');
@@ -270,13 +322,13 @@
         ctx.fillRect(0, 0, W, H);
         for (const s of stars) {
           const a = s.a + rot + yaw;
-          let x = Math.cos(a) * s.r;
-          let y = Math.sin(a) * s.r;
-          // tilt for pseudo-3D perspective
+          const r = s.rFrac * galaxyRadius;
+          const x = Math.cos(a) * r;
+          const y = Math.sin(a) * r;
           const py = y * tilt;
           const depth = (Math.sin(a) * 0.5 + 0.5);
           const sc = (0.7 + depth * 0.6) * zoom;
-          const px = cx + x * zoom;
+          const px = cx + x * zoom * xStretch;
           const fy = cy + py * zoom;
           s.tw += s.tws;
           const alpha = 0.4 + Math.sin(s.tw) * 0.35 + depth * 0.2;
@@ -290,9 +342,14 @@
         ctx.globalCompositeOperation = 'source-over';
         requestAnimationFrame(frame);
       }
+
+      computeLayout();
+      let rt;
+      window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(computeLayout, 80); });
       frame();
     })();
   </script>
 
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f0f03d0605bf45f1a3b17cf7d5e6861f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
